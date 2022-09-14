@@ -1,19 +1,16 @@
-- name: Auto-assign Issue
-  # You may pin to the exact commit or the version.
-  # uses: pozil/auto-assign-issue@f04c62d1f5dbc53c4bd013e288199958ca6fe1a9
-  uses: pozil/auto-assign-issue@v1.10.0
-  with:
-    # The GITHUB_TOKEN, needed to update the Issue
-    repo-token: # optional, default is ${{ github.token }}
-    # Comma separated list of user names. Required if teams is not specified.
-    assignees: 'ajredniwja'
-    # Comma separated list of team names. Required if assignees is not specified.
-    teams: # optional
-    # Number of random assignee
-    numOfAssignee: # optional
-    # Flag that removes assignees before assigning them (useful the issue is reasigned).
-    removePreviousAssignees: # optional
-    # Flag that prevents the action from failing when there are no assignees.
-    allowNoAssignees: # optional
-    # Flag that allows self-assignment to the issue author.
-    allowSelfAssign: # optional, default is true
+name: Issue assignment
+
+on:
+    issues:
+        types: [opened]
+
+jobs:
+    auto-assign:
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Auto-assign issue'
+              uses: pozil/auto-assign-issue@v1
+              with:
+                  assignees: ajredniwja
+                  numOfAssignee: 2
+              
